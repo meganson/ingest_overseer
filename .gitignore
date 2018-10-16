@@ -1,0 +1,7 @@
+
+*.idea
+
+conf/dev.json
+conf/prd.json
+
+node_modules/

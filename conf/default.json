@@ -1,0 +1,112 @@
+{
+  "appName": "m_ingest_overseer",
+  "log": {
+    "dir": "/data/log/",
+    "consoleLevel": "info"
+  },
+  "daemon": {
+    "isReingest": true,
+    "isObserve": true,
+    "isRereport": true,
+    "reingestTimeMinutes": 10,
+    "C001IntervalMinutes": 5,
+    "rereportTimeMinutes": 5,
+    "observeTimeMinutes": 3,
+    "reingestLimitCnt": 10,
+    "rereportLimitCnt": 10,
+    "onceSpotCnt": 10
+  },
+  "overseer_v1": {
+    "use": true,
+    "intervalMinutes": 2,
+    "wIntervalMinutes": 2,
+    "minSpareServer": 2,
+    "maxSpareServer": 4,
+    "separateServer": 3,
+    "maxServer": 50,
+    "wMaxServer": 16
+  },
+  "daemon_v2": {
+    "isReingest": true,
+    "reingestTimeMinutes": 10,
+    "C001IntervalMinutes": 5
+  },
+  "overseer_v2": {
+    "use": true,
+    "intervalMinutes": 3,
+    "prepare": {
+      "max": 30,
+      "type": "c4.xlarge",
+      "price": "0.227",
+      "tag": "ingest-prepare-spot-prd"
+    },
+    "deeplearning": {
+      "max": 5,
+      "type": "c4.xlarge",
+      "price": "0.227",
+      "tag": "ingest-deeplearning-spot-prd"
+    },
+    "parallel": {
+      "max": 150,
+      "type": "c4.8xlarge",
+      "price": "1.815",
+      "tag": "ingest-parallel-spot-prd"
+    },
+    "merge": {
+      "max": 20,
+      "type": "c4.xlarge",
+      "price": "0.227",
+      "tag": "ingest-merge-spot-prd"
+    }
+  },
+  "pooq": {
+    "host": "get-media.pooq.co.kr"
+  },
+  "aws": {
+    "ec2": {
+      "region": "ap-northeast-2",
+      "imageId": "ami-b5b86adb",
+      "subnetId_a": "subnet-70ecce19",
+      "subnetId_c": "subnet-0f81e442",
+      "spot_subnetId_a": "subnet-de9b36b6",
+      "spot_subnetId_c": "subnet-2ea3bf63",
+      "availabilityZone": "ap-northeast-2a",
+      "c4_4xlarge": {
+        "price": "0.907",
+        "tag": "ingest-spot-prd"
+      },
+      "c4_8xlarge": {
+        "price": "1.815",
+        "tag": "ingest-spot-ts-prd"
+      },
+      "spotPriceRate": 1.8,
+      "keyName": "pooq-cdn",
+      "blockDeviceMappings": [
+        {
+          "DeviceName": "/dev/xvda",
+          "Ebs": {
+            "DeleteOnTermination": true,
+            "VolumeType": "gp2",
+            "VolumeSize": 200
+          }
+        }
+      ]
+    }
+  },
+  "db": {
+    "namespace": "m_ingest",
+    "hostname": "hostname",
+    "username": "username",
+    "database": "m_ingest",
+    "password": "pwd",
+    "port": "3306",
+    "procedure": true,
+    "encrypt": true,
+    "connLimit": 3,
+    "pool": {
+      "max": 3,
+      "min": 0,
+      "idleTimeoutMillis": 30000
+    }
+  }
+}
