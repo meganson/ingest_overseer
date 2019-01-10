@@ -8,12 +8,12 @@ This node.js project contains ingest the media from broadcasting network. It is 
 
 It's simple. You just do it below.
 
-- install pm2
+- Install pm2
 ```
 npm i install pm2
 ```
 
-- start program example using pm2
+- Start program example using pm2
 ```
 pm2 start app.js -c samples
 ```
